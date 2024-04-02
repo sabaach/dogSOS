@@ -16,6 +16,7 @@
 		8A7053ED2BB56719007D1EE1 /* CallPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7053EC2BB56719007D1EE1 /* CallPageView.swift */; };
 		8A8041052BB1F4C7008F96BB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8041042BB1F4C7008F96BB /* SplashView.swift */; };
 		8ACA532F2BB84D7300D4CD78 /* ThankYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA532E2BB84D7300D4CD78 /* ThankYouView.swift */; };
+		BE2AA9042BBBD6DF00B12722 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2AA9032BBBD6DF00B12722 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		8A7053EC2BB56719007D1EE1 /* CallPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallPageView.swift; sourceTree = "<group>"; };
 		8A8041042BB1F4C7008F96BB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		8ACA532E2BB84D7300D4CD78 /* ThankYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouView.swift; sourceTree = "<group>"; };
+		BE2AA9032BBBD6DF00B12722 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				46B784B729B847EC00A6990E /* SayurSquareApp.swift */,
 				46B784B929B847EC00A6990E /* ContentView.swift */,
 				8ACA532E2BB84D7300D4CD78 /* ThankYouView.swift */,
+				BE2AA9032BBBD6DF00B12722 /* RatingView.swift */,
 				8A7053EC2BB56719007D1EE1 /* CallPageView.swift */,
 				8A8041042BB1F4C7008F96BB /* SplashView.swift */,
 				8A2822592BB15B40006348D4 /* Storyboard.storyboard */,
@@ -159,6 +162,7 @@
 				8A7053ED2BB56719007D1EE1 /* CallPageView.swift in Sources */,
 				8A46B2C42BB13E1300C5CAE3 /* ContactDatabase.swift in Sources */,
 				8ACA532F2BB84D7300D4CD78 /* ThankYouView.swift in Sources */,
+				BE2AA9042BBBD6DF00B12722 /* RatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

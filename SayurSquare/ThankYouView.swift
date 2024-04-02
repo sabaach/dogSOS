@@ -1,31 +1,40 @@
 import SwiftUI
 
 struct ThankYouView: View {
+    @State private var rating = 0
     var body: some View {
         VStack {
-            Text("Terima Kasih!")
+            Spacer()
+            Text("Thank you for using our service!!")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)
+                .multilineTextAlignment(.center)
                 .padding()
             
-            Image(systemName: "heart.fill")
-                .font(.system(size: 100))
-                .foregroundColor(.red)
-                .padding()
+            Image("man and dog")
+                .resizable()
+                .padding(10.0)
+                .frame(width: 250.0, height: 250.0)
             
-            Text("Terima kasih telah menggunakan aplikasi kami.")
+            Text("Rate the vet")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding()
             
+            HStack{
+                RatingView(rating: $rating)
+            }.padding(.bottom, 10)
+            
             NavigationLink(destination: ContentView()) {
-                Text("Kembali ke Beranda")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
+                Text("Send")
+                    .foregroundColor(Color.white)
+                    .padding(10.0)
+                    .frame(width: 140, height: 50.0)
+                    .background(Color.orange)
                     .cornerRadius(10)
             }
+            Spacer()
         }
         .padding()
         .navigationBarHidden(true) // Menyembunyikan tombol navigasi kembali
