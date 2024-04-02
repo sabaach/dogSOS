@@ -20,7 +20,13 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $isActive, content: {
-            ContentView()
+            TermPage()
         })
+    }
+}
+
+struct SplashView_Preview: PreviewProvider {
+    static var previews: some View {
+        SplashView()
     }
 }

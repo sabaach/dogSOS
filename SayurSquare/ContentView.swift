@@ -1,18 +1,15 @@
 import SwiftUI
 
 
-//Waktu interval pergantian vet
-//Slider masih belum fix
 //Map Kit belum
 //Muncul Alert setelah selesai menelepon. Kalau ya ke page terakhir, kalau tidak refresh dokter
 //pesan modality muncul dibawah call
-//setelah waktu habis kasih modality "apakah dokter menjawab?, jika iya maka next page rating. Jika tidak maka refresh page dan telepon dokter selanjutnya"
 
 
 struct ContentView: View {
     @State private var showingAlert = false // State untuk menampilkan alert
     @State private var isDragging = false // State untuk melacak apakah gesture sedang berlangsung
-    @State private var xOffset: CGFloat = 0 // State untuk melacak offset horizontal
+    @State private var offset: CGFloat = 0 // State untuk melacak offset horizontal
     @State private var selectedContactIndex = 0
     @State private var navigateToCallPage = false // State untuk menentukan apakah harus navigasi ke CallPageView
     
@@ -23,40 +20,36 @@ struct ContentView: View {
                     .font(.system(size: 55, weight: .bold, design: .default))
                     .foregroundColor(.black)
                 ProductCard(imageName: "doglogo")
-                FooterView(buttonAction: {
-                    self.showingAlert = true // Menampilkan alert ketika tombol ditekan
-                    Timer.scheduledTimer(withTimeInterval: 2 * 60, repeats: false) { _ in
-                                        // Pindah ke kontak berikutnya jika tidak ada jawaban dalam 10 menit
-                                        self.moveToNextContact()
-                                    }
+                ZStack(alignment: Alignment(horizontal: .leading, vertical: .center), content: {
+                    Capsule()
+                        .fill(Color(hex: "01224D"))
+                        .frame(height: 80)
+                    Text("Emergency Call")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .offset(x: 100)
                     
+                    Capsule()
+                        .fill(Color(hex: "EB5644"))
+                        .frame(width: offset+70, height: 74)
+                        .offset(x:4)
+                    ZStack {
+                        Circle()
+                            .fill(Color(hex: "EB5644"))
+                            .frame(width: 70, height: 75)
+                            .padding(.leading, 5)
+                        Text("SOS")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .offset(x: 2)
+                    }
+                    .offset(x: offset)
+                    .gesture(swipeGesture)
                 })
-                .gesture(swipeGesture) // Menambahkan gestur swipe pada footer
-                .offset(x: isDragging ? xOffset : 0) // Mengatur offset sesuai dengan gesture
-                .animation(.easeInOut) // Animasi untuk perubahan offset
+                .padding()
             }
-            .padding(.all, 16)
-            .alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text("Persetujuan"),
-                    message: Text("Apakah Anda yakin ingin melanjutkan?"),
-                    primaryButton: .default(Text("Ya"), action: {
-                        // Tambahkan logika ketika tombol "Ya" ditekan
-                        // Mengambil nomor telepon dari kontak yang dipilih
-                        let phoneNumber = contactDatabase[selectedContactIndex].phoneNumber
-                        // Membuat URL untuk menelepon nomor telepon
-                        if let url = URL(string: "tel://\(phoneNumber)") {
-                            UIApplication.shared.open(url)
-                        }
-                        // Set state navigateToCallPage menjadi true untuk navigasi ke CallPageView
-                        navigateToCallPage = true
-                    }),
-                    secondaryButton: .cancel(Text("Tidak"))
-                )
-            }
-            .preferredColorScheme(.light)
-            .navigationBarHidden(true)
-            // Navigasi ke CallPageView jika navigateToCallPage bernilai true
             .background(
                 NavigationLink(destination: CallPageView(), isActive: $navigateToCallPage) {
                     EmptyView()
@@ -66,33 +59,43 @@ struct ContentView: View {
         .navigationBarBackButtonHidden(true) // Sembunyikan tombol kembali saat beralih ke ThankYouView
     }
     
-    // Gestur swipe untuk menampilkan alert saat digeser
     private var swipeGesture: some Gesture {
         DragGesture(minimumDistance: 50, coordinateSpace: .local)
             .onChanged { value in
                 // Update state saat gesture sedang berlangsung
                 isDragging = true
-                xOffset = value.translation.width
+                offset = value.translation.width
+                if offset >= UIScreen.main.bounds.width - 110{
+                    offset = UIScreen.main.bounds.width - 110
+                } else if offset < 0{
+                    offset = 0
+                }
             }
             .onEnded { value in
                 // Kembalikan state ke nilai awal setelah gesture selesai
                 isDragging = false
-                xOffset = 0
-                if value.translation.width > 50 {
-                    self.showingAlert = true // Menampilkan alert ketika digeser
+                offset = 0
+                if value.translation.width > UIScreen.main.bounds.width - 110 {
+                    let phoneNumber = contactDatabase[selectedContactIndex].phoneNumber
+                    // Membuat URL untuk menelepon nomor telepon
+                    if let url = URL(string: "tel://\(phoneNumber)") {
+                        UIApplication.shared.open(url)
+                    }
+                    
+                    navigateToCallPage = true
                 }
             }
     }
     
     
     // Fungsi untuk memindahkan ke kontak berikutnya
-        private func moveToNextContact() {
-            if selectedContactIndex < contactDatabase.count - 1 {
-                selectedContactIndex += 1
-                // Munculkan kembali alert untuk kontak berikutnya
-                showingAlert = true
-            }
+    private func moveToNextContact() {
+        if selectedContactIndex < contactDatabase.count - 1 {
+            selectedContactIndex += 1
+            // Munculkan kembali alert untuk kontak berikutnya
+            showingAlert = true
         }
+    }
 }
 
 struct ProductCard: View {
@@ -111,24 +114,6 @@ struct ProductCard: View {
         .frame(width: .infinity, height: .infinity, alignment: .center)
         .cornerRadius(8)
         .padding(.all,0)
-    }
-}
-
-struct FooterView: View {
-    var buttonAction: () -> Void // Closure untuk menangani aksi tombol
-    
-    var body: some View {
-        VStack {
-            Image(systemName: "circle.fill")
-                .resizable()
-                .frame(width: 80, height: 80)
-                .foregroundColor(.red)
-                .overlay(
-                    Text("SOS")
-                        .font(.system(size: 22, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                )
-        }
     }
 }
 

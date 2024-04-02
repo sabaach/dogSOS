@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CallPageView: View {
-    @State private var timeRemaining = 2 // Waktu mundur dalam detik
+    @State private var timeRemaining = 10 // Waktu mundur dalam detik
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect() // Timer untuk menghitung waktu
     
     @State private var showAlert = false // State untuk menampilkan alert
@@ -74,7 +74,7 @@ struct CallPageView: View {
     
     // Fungsi untuk menyetel ulang timer
     private func resetTimer() {
-        timeRemaining = 120 // Setel ulang waktu mundur menjadi 2 menit
+        timeRemaining = 10 // Setel ulang waktu mundur menjadi 2 menit
     }
 }
 
