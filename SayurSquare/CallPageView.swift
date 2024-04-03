@@ -1,22 +1,31 @@
+// CallPageView.swift
 import SwiftUI
+import MapKit
 
 struct CallPageView: View {
-    @State private var timeRemaining = 2 // Waktu mundur dalam detik
+    @State private var timeRemaining = 10 // Waktu mundur dalam detik
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect() // Timer untuk menghitung waktu
     
     @State private var showAlert = false // State untuk menampilkan alert
     @State private var lastCalledContactIndex = 0 // Indeks terakhir dari kontak yang dipanggil
     @State private var navigateToThankYou = false
     
+    // Koordinat titik user
+    let userCoordinate = CLLocationCoordinate2D(latitude: -6.2033, longitude: 106.8158) // Contoh koordinat
+    
     var body: some View {
         VStack {
             Text("Calling...")
                 .font(.largeTitle)
                 .foregroundColor(.blue)
-            Spacer()
-            Button("Tap Me") {
-                // Action when button is tapped
-            }
+            // Menambahkan Map di dalam VStack
+            MapView(userCoordinate: userCoordinate,
+                    doctorCoordinate: CLLocationCoordinate2D(latitude: contactDatabase[lastCalledContactIndex].latitude, longitude: contactDatabase[lastCalledContactIndex].longitude),
+                    doctorName: contactDatabase[lastCalledContactIndex].name)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
+            
+//            Spacer()
             .padding()
             Spacer()
             Image("doglogo")
@@ -39,8 +48,8 @@ struct CallPageView: View {
                 title: Text("Apakah dokter menjawab?"),
                 primaryButton: .default(Text("Ya"), action: {
                     // Lakukan sesuatu jika dokter menjawab
-                                            resetTimer() // Setel ulang timer setelah menjawab
-                                            navigateToThankYou = true // Navigasi ke ThankYouView
+                    resetTimer() // Setel ulang timer setelah menjawab
+                    navigateToThankYou = true // Navigasi ke ThankYouView
                 }),
                 secondaryButton: .default(Text("Tidak"), action: {
                     // Telpon dokter selanjutnya jika tidak ada jawaban
@@ -50,15 +59,14 @@ struct CallPageView: View {
             )
         }
         .onDisappear {
-                        timer.upstream.connect().cancel() // Memberhentikan timer saat CallPageView tidak lagi terlihat
-                    }
+            timer.upstream.connect().cancel() // Memberhentikan timer saat CallPageView tidak lagi terlihat
+        }
         .preferredColorScheme(.light)
         .background(
-                        NavigationLink(destination: ThankYouView(), isActive: $navigateToThankYou) {
-                            EmptyView()
-                        }
-                    )
-
+            NavigationLink(destination: ThankYouView(), isActive: $navigateToThankYou) {
+                EmptyView()
+            }
+        )
     }
     
     // Fungsi untuk melakukan panggilan ke dokter selanjutnya
@@ -74,7 +82,7 @@ struct CallPageView: View {
     
     // Fungsi untuk menyetel ulang timer
     private func resetTimer() {
-        timeRemaining = 120 // Setel ulang waktu mundur menjadi 2 menit
+        timeRemaining = 10 // Setel ulang waktu mundur menjadi 2 menit
     }
 }
 

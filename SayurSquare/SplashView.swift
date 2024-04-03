@@ -15,12 +15,18 @@ struct SplashView: View {
             
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.isActive = true
             }
         }
         .fullScreenCover(isPresented: $isActive, content: {
-            ContentView()
+            TermPage()
         })
+    }
+}
+
+struct SplashView_Preview: PreviewProvider {
+    static var previews: some View {
+        SplashView()
     }
 }
