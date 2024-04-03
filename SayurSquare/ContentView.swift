@@ -114,6 +114,7 @@ struct ProductCard: View {
         .frame(width: .infinity, height: .infinity, alignment: .center)
         .cornerRadius(8)
         .padding(.all,0)
+        .navigationBarHidden(true)
     }
 }
 

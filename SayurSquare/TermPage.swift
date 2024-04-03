@@ -25,6 +25,7 @@ struct TermPage: View {
             .padding()
             .navigationBarTitle("Terms & Condition")
             .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
