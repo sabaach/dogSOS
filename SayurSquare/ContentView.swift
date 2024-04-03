@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var navigateToCallPage = false // State untuk menentukan apakah harus navigasi ke CallPageView
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .center, spacing: 16) {
                 Text("DogSOS")
                     .font(.system(size: 55, weight: .bold, design: .default))
@@ -50,11 +50,14 @@ struct ContentView: View {
                 })
                 .padding()
             }
-            .background(
-                NavigationLink(destination: CallPageView(), isActive: $navigateToCallPage) {
-                    EmptyView()
-                }
-            )
+//            .background(
+//                NavigationLink(destination: CallPageView(), isActive: $navigateToCallPage) {
+//                    EmptyView()
+//                }
+//            )
+            .navigationDestination(isPresented: $navigateToCallPage){
+                CallPageView()
+            }
         }
         .navigationBarBackButtonHidden(true) // Sembunyikan tombol kembali saat beralih ke ThankYouView
         .preferredColorScheme(.light)

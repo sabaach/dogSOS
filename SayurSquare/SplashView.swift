@@ -23,6 +23,7 @@ struct SplashView: View {
             TermPage()
         })
         .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 
