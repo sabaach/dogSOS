@@ -15,18 +15,22 @@ struct CallPageView: View {
     
     var body: some View {
         VStack {
-            Text("Calling...")
+            Text("Directing...")
                 .font(.largeTitle)
-                .foregroundColor(.blue)
+                .fontWeight(.bold)
+                .foregroundColor(.black)
+            Text(contactDatabase[lastCalledContactIndex].name)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .padding(.top, 10.0)
             // Menambahkan Map di dalam VStack
             MapView(userCoordinate: userCoordinate,
                     doctorCoordinate: CLLocationCoordinate2D(latitude: contactDatabase[lastCalledContactIndex].latitude, longitude: contactDatabase[lastCalledContactIndex].longitude),
                     doctorName: contactDatabase[lastCalledContactIndex].name)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            
-//            Spacer()
+            .frame(height: 250.0)
+            .edgesIgnoringSafeArea(.all)
             .padding()
+            Text(contactDatabase[lastCalledContactIndex].address)
             Spacer()
             Image("doglogo")
                 .resizable()
@@ -45,13 +49,13 @@ struct CallPageView: View {
         }
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Apakah dokter menjawab?"),
-                primaryButton: .default(Text("Ya"), action: {
+                title: Text("Is the vet available?\nClick “No” if current vet is not available"),
+                primaryButton: .default(Text("Yes"), action: {
                     // Lakukan sesuatu jika dokter menjawab
                     resetTimer() // Setel ulang timer setelah menjawab
                     navigateToThankYou = true // Navigasi ke ThankYouView
                 }),
-                secondaryButton: .default(Text("Tidak"), action: {
+                secondaryButton: .default(Text("No"), action: {
                     // Telpon dokter selanjutnya jika tidak ada jawaban
                     makeNextCall()
                     resetTimer() // Setel ulang timer setelah tidak ada jawaban

@@ -82,7 +82,6 @@ struct ContentView: View {
                     if let url = URL(string: "tel://\(phoneNumber)") {
                         UIApplication.shared.open(url)
                     }
-                    
                     navigateToCallPage = true
                 }
             }

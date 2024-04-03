@@ -37,6 +37,7 @@
 		BE2AA9032BBBD6DF00B12722 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		BE348D302BBC32F700E07981 /* TermPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermPage.swift; sourceTree = "<group>"; };
 		BE348D322BBC384A00E07981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
+		BE348D342BBCFADB00E07981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 		46B784B629B847EC00A6990E /* SayurSquare */ = {
 			isa = PBXGroup;
 			children = (
+				BE348D342BBCFADB00E07981 /* Info.plist */,
 				46B784B729B847EC00A6990E /* SayurSquareApp.swift */,
 				46B784B929B847EC00A6990E /* ContentView.swift */,
 				BE348D302BBC32F700E07981 /* TermPage.swift */,
@@ -303,17 +305,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SayurSquare/Preview Content\"";
-				DEVELOPMENT_TEAM = 2N2A4XFHX4;
+				DEVELOPMENT_TEAM = S6Z46Q6KJT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SayurSquare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DogSOS;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user description";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,17 +339,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SayurSquare/Preview Content\"";
-				DEVELOPMENT_TEAM = 2N2A4XFHX4;
+				DEVELOPMENT_TEAM = S6Z46Q6KJT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SayurSquare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DogSOS;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user description";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
