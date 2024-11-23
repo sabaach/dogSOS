@@ -17,6 +17,7 @@
 		8A7053ED2BB56719007D1EE1 /* CallPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7053EC2BB56719007D1EE1 /* CallPageView.swift */; };
 		8A8041052BB1F4C7008F96BB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8041042BB1F4C7008F96BB /* SplashView.swift */; };
 		8ACA532F2BB84D7300D4CD78 /* ThankYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA532E2BB84D7300D4CD78 /* ThankYouView.swift */; };
+		937546CE2BBDAAB9007534ED /* TextViewJustify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937546CD2BBDAAB9007534ED /* TextViewJustify.swift */; };
 		BE2AA9042BBBD6DF00B12722 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2AA9032BBBD6DF00B12722 /* RatingView.swift */; };
 		BE348D312BBC32F700E07981 /* TermPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE348D302BBC32F700E07981 /* TermPage.swift */; };
 		BE348D332BBC384A00E07981 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE348D322BBC384A00E07981 /* PrivacyView.swift */; };
@@ -34,6 +35,7 @@
 		8A7053EC2BB56719007D1EE1 /* CallPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallPageView.swift; sourceTree = "<group>"; };
 		8A8041042BB1F4C7008F96BB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		8ACA532E2BB84D7300D4CD78 /* ThankYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYouView.swift; sourceTree = "<group>"; };
+		937546CD2BBDAAB9007534ED /* TextViewJustify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewJustify.swift; sourceTree = "<group>"; };
 		BE2AA9032BBBD6DF00B12722 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		BE348D302BBC32F700E07981 /* TermPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermPage.swift; sourceTree = "<group>"; };
 		BE348D322BBC384A00E07981 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				8A2822592BB15B40006348D4 /* Storyboard.storyboard */,
 				8A46B2C32BB13E1300C5CAE3 /* ContactDatabase.swift */,
 				8A21BEF82BBC57940061B666 /* MapView.swift */,
+				937546CD2BBDAAB9007534ED /* TextViewJustify.swift */,
 				46B784BB29B847EC00A6990E /* Assets.xcassets */,
 				46B784BD29B847EC00A6990E /* Preview Content */,
 			);
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46B784BA29B847EC00A6990E /* ContentView.swift in Sources */,
+				937546CE2BBDAAB9007534ED /* TextViewJustify.swift in Sources */,
 				8A8041052BB1F4C7008F96BB /* SplashView.swift in Sources */,
 				BE348D332BBC384A00E07981 /* PrivacyView.swift in Sources */,
 				46B784B829B847EC00A6990E /* SayurSquareApp.swift in Sources */,
@@ -305,13 +309,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SayurSquare/Preview Content\"";
-				DEVELOPMENT_TEAM = S6Z46Q6KJT;
+				DEVELOPMENT_TEAM = 2U62MM8G6X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SayurSquare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DogSOS;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user description";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -323,7 +327,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sabach.DogSOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bryan.DogSOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -339,13 +343,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SayurSquare/Preview Content\"";
-				DEVELOPMENT_TEAM = S6Z46Q6KJT;
+				DEVELOPMENT_TEAM = 2U62MM8G6X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SayurSquare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DogSOS;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user description";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Show the user location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,7 +361,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sabach.DogSOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bryan.DogSOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

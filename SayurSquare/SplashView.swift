@@ -22,6 +22,8 @@ struct SplashView: View {
         .fullScreenCover(isPresented: $isActive, content: {
             TermPage()
         })
+        .navigationBarHidden(true)
+        .preferredColorScheme(.light)
     }
 }
 

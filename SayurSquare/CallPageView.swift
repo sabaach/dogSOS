@@ -8,69 +8,110 @@ struct CallPageView: View {
     
     @State private var showAlert = false // State untuk menampilkan alert
     @State private var lastCalledContactIndex = 0 // Indeks terakhir dari kontak yang dipanggil
-    @State private var navigateToThankYou = false
+    @State private var navigateToThankYou:Bool = false
+    @State private var position = MapCameraPosition.userLocation(fallback: .automatic)
     
     // Koordinat titik user
-    let userCoordinate = CLLocationCoordinate2D(latitude: -6.2033, longitude: 106.8158) // Contoh koordinat
+//    let userCoordinate = CLLocationCoordinate2D(latitude: -6.2033, longitude: 106.8158) // Contoh koordinat
     
     var body: some View {
-        VStack {
-            Text("Directing...")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-            Text(contactDatabase[lastCalledContactIndex].name)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .padding(.top, 10.0)
-            // Menambahkan Map di dalam VStack
-            MapView(userCoordinate: userCoordinate,
-                    doctorCoordinate: CLLocationCoordinate2D(latitude: contactDatabase[lastCalledContactIndex].latitude, longitude: contactDatabase[lastCalledContactIndex].longitude),
-                    doctorName: contactDatabase[lastCalledContactIndex].name)
-            .frame(height: 250.0)
-            .edgesIgnoringSafeArea(.all)
-            .padding()
-            Text(contactDatabase[lastCalledContactIndex].address)
-            Spacer()
-            Image("doglogo")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .foregroundColor(.yellow)
-            Text("Time Remaining: \(timeRemaining) seconds") // Tampilkan waktu yang tersisa
+        NavigationStack {
+            VStack {
+                Text("Directing...")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                Text(contactDatabase[lastCalledContactIndex].name)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .padding(.top, 10.0)
+                // Menambahkan Map di dalam VStack
+//                MapView(userCoordinate: userCoordinate,
+//                        doctorCoordinate: CLLocationCoordinate2D(latitude: contactDatabase[lastCalledContactIndex].latitude, longitude: contactDatabase[lastCalledContactIndex].longitude),
+//                        doctorName: contactDatabase[lastCalledContactIndex].name)
+                Map(position: $position){
+                    UserAnnotation(){
+                        ZStack {
+                            Circle()
+                                .frame(width: 32, height: 32)
+                                .foregroundStyle(.blue.opacity(0.25))
+                            Circle()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.white)
+                            Circle()
+                                .frame(width: 12, height: 12)
+                                .foregroundStyle(.blue)
+                        }
+                    }
+                    
+        //            ForEach(myFavoriteLocations) { location in
+        //                Marker(location.name, coordinate: location.coordinate)
+        //                    .tint(.red)
+        //
+        //            }
+                    
+                    Marker(contactDatabase[lastCalledContactIndex].name, coordinate: CLLocationCoordinate2D(latitude: contactDatabase[lastCalledContactIndex].latitude, longitude: contactDatabase[lastCalledContactIndex].longitude))
+                        .tint(.red)
+                    
+                }
+                .mapControls{
+                    MapUserLocationButton()
+                    MapPitchToggle()
+                    MapCompass()
+                }
+                .onAppear{
+                    CLLocationManager().requestWhenInUseAuthorization()
+                }
+                .frame(height: 250.0)
+//                .edgesIgnoringSafeArea(.all)
                 .padding()
-        }
-        .padding()
-        .onReceive(timer) { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            } else {
-                showAlert = true // Menampilkan alert saat waktu habis
+                Text(contactDatabase[lastCalledContactIndex].address)
+                Spacer()
+                Image("doglogo")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.yellow)
+                Text("Time Remaining: \(timeRemaining) seconds") // Tampilkan waktu yang tersisa
+                    .padding()
             }
-        }
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("Is the vet available?\nClick “No” if current vet is not available"),
-                primaryButton: .default(Text("Yes"), action: {
-                    // Lakukan sesuatu jika dokter menjawab
-                    resetTimer() // Setel ulang timer setelah menjawab
-                    navigateToThankYou = true // Navigasi ke ThankYouView
-                }),
-                secondaryButton: .default(Text("No"), action: {
-                    // Telpon dokter selanjutnya jika tidak ada jawaban
-                    makeNextCall()
-                    resetTimer() // Setel ulang timer setelah tidak ada jawaban
-                })
-            )
-        }
-        .onDisappear {
-            timer.upstream.connect().cancel() // Memberhentikan timer saat CallPageView tidak lagi terlihat
-        }
-        .preferredColorScheme(.light)
-        .background(
-            NavigationLink(destination: ThankYouView(), isActive: $navigateToThankYou) {
-                EmptyView()
+            .padding()
+            .onReceive(timer) { _ in
+                if timeRemaining > 0 {
+                    timeRemaining -= 1
+                } else {
+                    showAlert = true // Menampilkan alert saat waktu habis
+                }
             }
-        )
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Is the vet available?\nClick “No” if current vet is not available"),
+                    primaryButton: .default(Text("Yes"), action: {
+                        // Lakukan sesuatu jika dokter menjawab
+                        resetTimer() // Setel ulang timer setelah menjawab
+                        navigateToThankYou = true // Navigasi ke ThankYouView
+                    }),
+                    secondaryButton: .default(Text("No"), action: {
+                        // Telpon dokter selanjutnya jika tidak ada jawaban
+                        makeNextCall()
+                        resetTimer() // Setel ulang timer setelah tidak ada jawaban
+                    })
+                )
+            }
+            .onDisappear {
+                timer.upstream.connect().cancel() // Memberhentikan timer saat CallPageView tidak lagi terlihat
+            }
+            .preferredColorScheme(.light)
+            .navigationDestination(isPresented: $navigateToThankYou){
+                ThankYouView(numCalledContactIndex: lastCalledContactIndex)
+            }
+            .navigationBarHidden(true)
+            //DEPRECATED
+//            .background(
+//                NavigationLink(destination: ThankYouView(), isActive: $navigateToThankYou) {
+//                    EmptyView()
+//                }
+//            )
+        }
     }
     
     // Fungsi untuk melakukan panggilan ke dokter selanjutnya
